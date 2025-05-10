@@ -58,6 +58,113 @@ Arquivo de build e dependências do Maven.
 - 📘 README.md
 Documentação do projeto — você está lendo ele agora
 
+## 🚀 Diagrama de Classes
+
+```mermaid
+classDiagram
+    class Usuario {
+        Long id
+        String nome
+        String email
+        String senha
+        String telefone
+        Enum tipo
+    }
+
+    class Restaurante {
+        Long id
+        String nome
+        String endereco
+        String telefone
+        String descricao
+    }
+
+    class Mesa {
+        Long id
+        int numero
+        int capacidade
+        boolean disponivel
+        Long restauranteId
+    }
+
+    class Reserva {
+        Long id
+        LocalDateTime dataHora
+        int quantidadePessoas
+        Enum status
+        Long usuarioId
+        Long mesaId
+    }
+
+    Usuario "1" --> "0..*" Reserva
+    Restaurante "1" --> "0..*" Mesa
+    Mesa "1" --> "0..*" Reserva
+
+
+```
+## 🚀 Diagrama de relacionamento
+```mermaid
+erDiagram
+    USUARIO {
+        BIGINT id PK
+        VARCHAR nome
+        VARCHAR email
+        VARCHAR senha
+        VARCHAR telefone
+        ENUM tipo
+    }
+
+    RESTAURANTE {
+        BIGINT id PK
+        VARCHAR nome
+        VARCHAR endereco
+        VARCHAR telefone
+        VARCHAR descricao
+    }
+
+    MESA {
+        BIGINT id PK
+        INT numero
+        INT capacidade
+        BOOLEAN disponivel
+        BIGINT restaurante_id FK
+    }
+
+    RESERVA {
+        BIGINT id PK
+        DATETIME data_hora
+        INT quantidade_pessoas
+        ENUM status
+        BIGINT usuario_id FK
+        BIGINT mesa_id FK
+    }
+
+    USUARIO ||--o{ RESERVA : faz
+    MESA ||--o{ RESERVA : possui
+    RESTAURANTE ||--o{ MESA : contém
+```
+
+## 🚀 Diagrama de Interação
+
+```mermaid
+sequenceDiagram
+    participant Usuário
+    participant Frontend (Angular)
+    participant Backend (Spring)
+    participant Banco (PostgreSQL)
+
+    %% Ação do usuário
+    Usuário->>Frontend (Angular): Preenche formulário de reserva
+    Frontend->>Backend (Spring): POST /reserva (dados da reserva + JWT)
+    Backend->>Banco (PostgreSQL): Verifica disponibilidade da mesa
+    Banco-->>Backend: Mesa disponível
+    Backend->>Banco: INSERT reserva
+    Banco-->>Backend: Confirma inserção
+    Backend-->>Frontend: 201 Created + detalhes da reserva
+    Frontend-->>Usuário: Exibe mensagem de sucesso
+```
+
+
 
 ---
 
