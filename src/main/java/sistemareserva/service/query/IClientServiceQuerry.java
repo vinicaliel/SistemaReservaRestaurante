@@ -11,4 +11,6 @@ public interface IClientServiceQuerry {
 
     List<ClientEntity> findAll();
 
+    
+
 }

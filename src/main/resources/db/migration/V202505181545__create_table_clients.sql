@@ -6,5 +6,8 @@ CREATE TABLE clients (
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     phone CHAR(11) NOT NULL,
-    CONSTRAINT uk_phone UNIQUE (phone)
+    CONSTRAINT uk_phone UNIQUE (phone),
+    timeOfReservation INT NOT NULL,
+    CONSTRAINT chk_numberOfEntities CHECK (numberOfEntities >= 1 AND numberOfEntities <= 10),
+    CONSTRAINT chk_status CHECK (status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED'))
 );

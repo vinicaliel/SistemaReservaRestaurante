@@ -1,6 +1,5 @@
 package sistemareserva.service.impl;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -20,17 +19,26 @@ public class IClientServiceImpl implements IClientService {
 
     @Override
     public ClientEntity save(final ClientEntity entity) {
-        return null;
+        return clientRepository.save(entity);
     }
 
-        @Override
+    @Override
     public ClientEntity update(final ClientEntity entity){
-        return null;
+        var store = clientServiceQuerry.findById(entity.getId());
+        store.setName(entity.getName());
+        store.setPhone(entity.getPhone());
+        store.setTimeOfReservation(entity.getTimeOfReservation());
+        store.setObservation(entity.getObservation());
+        store.setNumberOfEntities(entity.getNumberOfEntities());
+        store.setStatus(entity.getStatus());
+
+        return clientRepository.save(store);
+
     }
  
     @Override
     public void delete(final long id){
-    return null;
+    clientRepository.deleteById(id);
     }
 
 

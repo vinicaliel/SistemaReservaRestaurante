@@ -40,6 +40,8 @@ public class ClientEntity {
     private String observation;
     @Column(nullable = false, length = 150)
     private Integer numberOfEntities;
+    @Column(nullable = false, length = 150)
+    private Integer timeOfReservation;
 
 
 

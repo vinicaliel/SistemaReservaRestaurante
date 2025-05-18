@@ -17,13 +17,17 @@ public class IClientServiceQuerryImpl implements IClientServiceQuerry {
 
     @Override
     public ClientEntity findById(Long id) {
-        return clientRepository.findById(id).orElse(null);
+        return clientRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Client not found with id: " + id) // You can customize the exception
+        );
     }
 
     @Override
     public List<ClientEntity> findAll() {
         return clientRepository.findAll();
     }
+
+    
 
 
 }
