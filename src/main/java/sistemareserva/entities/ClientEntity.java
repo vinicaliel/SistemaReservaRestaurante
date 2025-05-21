@@ -39,9 +39,9 @@ public class ClientEntity {
     @Column(nullable = false, length = 150)
     private String observation;
     @Column(nullable = false, length = 150)
-    private Integer numberOfEntities;
+    private String numberOfEntities;
     @Column(nullable = false, length = 150)
-    private Integer timeOfReservation;
+    private String timeOfReservation;
 
 
 
