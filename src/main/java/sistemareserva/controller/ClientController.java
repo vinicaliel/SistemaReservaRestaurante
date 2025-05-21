@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import sistemareserva.controller.dtoreq.SaveClientReservationRequest;
+import sistemareserva.controller.dtoresp.SaveClientReservationResponse;
 import sistemareserva.entities.ClientEntity;
 import sistemareserva.service.IClientService;
 
@@ -18,8 +20,29 @@ public class ClientController {
     private final IClientService clientService;
 
     @PostMapping
-    public ResponseEntity<ClientEntity> saveReservation(@RequestBody ClientEntity client) {
-        ClientEntity savedClient = clientService.save(client);
-        return ResponseEntity.ok(savedClient);
+    public ResponseEntity<SaveClientReservationResponse> saveReservation(@RequestBody SaveClientReservationRequest request) {
+        // 🔁 Manualmente transformando DTO → Entidade
+        ClientEntity entity = new ClientEntity();
+        entity.setName(request.getName());
+        entity.setPhone(request.getPhone());
+        entity.setStatus(request.getStatus());
+        entity.setObservation(request.getObservation());
+        entity.setNumberOfEntities(request.getNumberOfEntities());
+        entity.setTimeOfReservation(request.getTimeOfReservation());
+
+        // 💾 Salva no banco
+        ClientEntity savedClient = clientService.save(entity);
+
+        // 🔁 Manualmente transformando Entidade → DTO de resposta
+        SaveClientReservationResponse response = new SaveClientReservationResponse();
+        response.setId(savedClient.getId());
+        response.setName(savedClient.getName());
+        response.setPhone(savedClient.getPhone());
+        response.setStatus(savedClient.getStatus());
+        response.setObservation(savedClient.getObservation());
+        response.setNumberOfEntities(savedClient.getNumberOfEntities());
+        response.setTimeOfReservation(savedClient.getTimeOfReservation());
+
+        return ResponseEntity.ok(response);
     }
 }
