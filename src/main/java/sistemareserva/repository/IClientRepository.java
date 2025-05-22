@@ -7,6 +7,7 @@ import sistemareserva.entities.ClientEntity;
 
 @Repository
 public interface IClientRepository extends JpaRepository<ClientEntity, Long> {
-
+    
+    
     
 }
