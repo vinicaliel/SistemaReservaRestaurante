@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateClientReservationRequest {
-    private Long id;
+   
     private String name;
     private String phone;
     private String status;

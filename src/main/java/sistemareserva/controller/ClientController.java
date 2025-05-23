@@ -17,9 +17,11 @@ import lombok.RequiredArgsConstructor;
 import sistemareserva.controller.dtoreq.SaveClientReservationRequest;
 import sistemareserva.controller.dtoreq.UpdateClientReservationRequest;
 import sistemareserva.controller.dtoresp.GetClientReservationResponse;
+import sistemareserva.controller.dtoresp.ListClientReservationResponse;
 import sistemareserva.controller.dtoresp.SaveClientReservationResponse;
 import sistemareserva.controller.dtoresp.UpdateClientReservationResponse;
 import sistemareserva.entities.ClientEntity;
+import sistemareserva.mapper.IClientMapper;
 import sistemareserva.service.IClientService;
 import sistemareserva.service.query.IClientServiceQuerry;
 
@@ -30,107 +32,43 @@ public class ClientController {
 
     private final IClientService clientService;
     private final IClientServiceQuerry service;
+    private final IClientMapper mapper;
 
     @PostMapping
-    public ResponseEntity<SaveClientReservationResponse> saveReservation(@RequestBody SaveClientReservationRequest request) {
-        // 🔁 Manualmente transformando DTO → Entidade
-        ClientEntity entity = new ClientEntity();
-        entity.setName(request.getName());
-        entity.setPhone(request.getPhone());
-        entity.setStatus(request.getStatus());
-        entity.setObservation(request.getObservation());
-        entity.setNumberOfEntities(request.getNumberOfEntities());
-        entity.setTimeOfReservation(request.getTimeOfReservation());
+    public SaveClientReservationResponse save(@RequestBody SaveClientReservationRequest request) {
 
-        // 💾 Salva no banco
-        ClientEntity savedClient = clientService.save(entity);
+        var entity = mapper.toEntity(request);
+        clientService.save(entity);
+        return mapper.toResponse(entity);
 
-        // 🔁 Manualmente transformando Entidade → DTO de resposta
-        SaveClientReservationResponse response = new SaveClientReservationResponse();
-        response.setId(savedClient.getId());
-        response.setName(savedClient.getName());
-        response.setPhone(savedClient.getPhone());
-        response.setStatus(savedClient.getStatus());
-        response.setObservation(savedClient.getObservation());
-        response.setNumberOfEntities(savedClient.getNumberOfEntities());
-        response.setTimeOfReservation(savedClient.getTimeOfReservation());
 
-        return ResponseEntity.ok(response);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<UpdateClientReservationResponse> updateReservation(
+    public UpdateClientReservationResponse updateReservation(
     @PathVariable Long id,
     @RequestBody UpdateClientReservationRequest request) {
-        
-        
-        // 🔁 Manualmente transformando DTO → Entidade
-        ClientEntity entity = new ClientEntity();
-        entity.setId(id);
-        entity.setName(request.getName());
-        entity.setPhone(request.getPhone());
-        entity.setStatus(request.getStatus());
-        entity.setObservation(request.getObservation());
-        entity.setNumberOfEntities(request.getNumberOfEntities());
-        entity.setTimeOfReservation(request.getTimeOfReservation());
 
-        // 💾 Atualiza no banco
-        ClientEntity updatedClient = clientService.update(entity);
+        var entity = mapper.toEntityUpdate(id, request);
+        clientService.update(entity);
+        return mapper.toUpdateResponse(entity);
 
-        // 🔁 Manualmente transformando Entidade → DTO de resposta
-        UpdateClientReservationResponse response = new UpdateClientReservationResponse();
-        response.setId(updatedClient.getId());
-        response.setName(updatedClient.getName());
-        response.setPhone(updatedClient.getPhone());
-        response.setStatus(updatedClient.getStatus());
-        response.setObservation(updatedClient.getObservation());
-        response.setNumberOfEntities(updatedClient.getNumberOfEntities());
-        response.setTimeOfReservation(updatedClient.getTimeOfReservation());
 
-        return ResponseEntity.ok(response);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetClientReservationResponse> getClientById(@PathVariable Long id) {
-        ClientEntity client = service.findById(id);
-        if (client == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        GetClientReservationResponse response = new GetClientReservationResponse();
-        response.setId(client.getId());
-        response.setName(client.getName());
-        response.setPhone(client.getPhone());
-        response.setStatus(client.getStatus());
-        response.setObservation(client.getObservation());
-        response.setNumberOfEntities(client.getNumberOfEntities());
-        response.setTimeOfReservation(client.getTimeOfReservation());
-
-        return ResponseEntity.ok(response);
-
-    
-
+    public GetClientReservationResponse getClientById(@PathVariable Long id) {
+        var entity = service.findById(id);
+        return mapper.toGetResponse(entity);
 }
 
 @GetMapping
-public ResponseEntity<List<GetClientReservationResponse>> getAllClients() {
-    List<ClientEntity> clients = service.findAll();
-    List<GetClientReservationResponse> responseList = new ArrayList<>();
+List<ListClientReservationResponse> findAll() {
+    var entity = service.findAll();
+    return mapper.toListResponse(entity);
 
-    for (ClientEntity client : clients) {
-        GetClientReservationResponse response = new GetClientReservationResponse();
-        response.setId(client.getId());
-        response.setName(client.getName());
-        response.setPhone(client.getPhone());
-        response.setStatus(client.getStatus());
-        response.setObservation(client.getObservation());
-        response.setNumberOfEntities(client.getNumberOfEntities());
-        response.setTimeOfReservation(client.getTimeOfReservation());
+    
 
-        responseList.add(response);
-    }
-
-    return ResponseEntity.ok(responseList);
 }
 
 @DeleteMapping("{id}")
