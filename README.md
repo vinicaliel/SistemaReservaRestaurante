@@ -168,6 +168,50 @@ sequenceDiagram
 
 ---
 
+## ✅ Roteiro de Testes: Cadastro de Reserva
 
+Este roteiro descreve os testes unitários e de validação aplicados à funcionalidade de **cadastro de reservas** no sistema.
 
+### 🧪 Objetivo
 
+Garantir que todas as regras de negócio para o cadastro de reservas sejam devidamente validadas, prevenindo o envio de informações incompletas ou inválidas.
+
+### 📋 Campos da Reserva
+
+| Campo               | Obrigatório | Tipo/Validação                        |
+|---------------------|-------------|---------------------------------------|
+| `data`              | ✅ Sim      | Deve ser uma data válida no futuro    |
+| `hora`              | ✅ Sim      | Formato de hora válido (ex: 18:30)    |
+| `nome`              | ✅ Sim      | Texto não vazio                       |
+| `telefone`          | ✅ Sim      | Formato numérico ou regex             |
+| `observação`        | ❌ Não      | Texto livre (opcional)                |
+| `número de pessoas` | ✅ Sim      | Número inteiro positivo               |
+| `status`            | ✅ Sim      | Um dos: pendente, confirmado, cancelado, realizado |
+
+---
+
+### ✅ Casos de Teste
+
+| ID   | Descrição do Teste                                                    | Resultado Esperado                      |
+|------|------------------------------------------------------------------------|------------------------------------------|
+| CT01 | Cadastro com todos os campos válidos                                  | Reserva criada com sucesso              |
+| CT02 | Campo `data` vazio                                                     | Erro: "Data é obrigatória"              |
+| CT03 | Campo `data` com data passada                                          | Erro: "Data deve ser no futuro"         |
+| CT04 | Campo `hora` vazio                                                     | Erro: "Hora é obrigatória"              |
+| CT05 | Campo `hora` com formato inválido (ex: 25:99)                          | Erro: "Formato de hora inválido"        |
+| CT06 | Campo `nome` vazio                                                     | Erro: "Nome é obrigatório"              |
+| CT07 | Campo `telefone` vazio                                                 | Erro: "Telefone é obrigatório"          |
+| CT08 | Campo `telefone` com caracteres inválidos                              | Erro: "Formato de telefone inválido"    |
+| CT09 | Campo `número de pessoas` vazio ou zero                                | Erro: "Número de pessoas é obrigatório" |
+| CT10 | Campo `número de pessoas` com valor negativo                           | Erro: "Número de pessoas inválido"      |
+| CT11 | Campo `status` vazio                                                   | Erro: "Status é obrigatório"            |
+| CT12 | Campo `status` com valor fora do permitido                             | Erro: "Status inválido"                 |
+| CT13 | Campo `observação` preenchido                                          | Reserva criada com sucesso              |
+| CT14 | Campo `observação` deixado em branco                                   | Reserva criada com sucesso              |
+
+---
+
+### 🧰 Tecnologias de Teste
+
+- **Framework de Teste**: [JUnit 5](https://junit.org/junit5/)
+- **Execução**: via VS CODE
