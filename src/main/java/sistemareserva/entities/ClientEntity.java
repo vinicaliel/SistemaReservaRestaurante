@@ -30,6 +30,7 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long id;
+    @jakarta.validation.constraints.Size(min = 2, message = "O nome deve ter pelo menos 2 caracteres")
     @Column(nullable = false, length = 150)
     private String name;
     @Column(nullable = false, length = 150)
