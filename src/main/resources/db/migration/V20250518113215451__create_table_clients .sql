@@ -6,6 +6,7 @@ CREATE TABLE clients (
     observation VARCHAR(255),
     numberOfEntities INTEGER NOT NULL,
     timeOfReservation VARCHAR(150) NOT NULL,
+    dayOfReservation DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     
 );

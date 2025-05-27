@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import sistemareserva.controller.dtoreq.SaveClientReservationRequest;
 import sistemareserva.controller.dtoreq.UpdateClientReservationRequest;
@@ -25,6 +24,7 @@ public class IClientMapperImpl implements IClientMapper{
         entity.setStatus(request.getStatus());
         entity.setObservation(request.getObservation());
         entity.setNumberOfEntities(request.getNumberOfEntities());
+        entity.setDayOfReservation(request.getDayOfReservation());
         entity.setTimeOfReservation(request.getTimeOfReservation());
 
         return entity;
@@ -41,6 +41,7 @@ public class IClientMapperImpl implements IClientMapper{
         entity.setStatus(request.getStatus());
         entity.setObservation(request.getObservation());
         entity.setNumberOfEntities(request.getNumberOfEntities());
+        entity.setDayOfReservation(request.getDayOfReservation());
         entity.setTimeOfReservation(request.getTimeOfReservation());
 
         return entity;
@@ -57,6 +58,8 @@ public class IClientMapperImpl implements IClientMapper{
         response.setObservation(entity.getObservation());
         response.setNumberOfEntities(entity.getNumberOfEntities());
         response.setTimeOfReservation(entity.getTimeOfReservation());
+        response.setDayOfReservation(entity.getDayOfReservation());
+        
 
         return response;
     }
@@ -73,6 +76,7 @@ public class IClientMapperImpl implements IClientMapper{
             response.setObservation(entity.getObservation());
             response.setNumberOfEntities(entity.getNumberOfEntities());
             response.setTimeOfReservation(entity.getTimeOfReservation());
+            response.setDayOfReservation(entity.getDayOfReservation());
 
             responseList.add(response);
         }
@@ -89,6 +93,7 @@ public class IClientMapperImpl implements IClientMapper{
         response.setObservation(entity.getObservation());
         response.setNumberOfEntities(entity.getNumberOfEntities());
         response.setTimeOfReservation(entity.getTimeOfReservation());
+        response.setDayOfReservation(entity.getDayOfReservation());
 
         return response;
 
@@ -104,6 +109,7 @@ public class IClientMapperImpl implements IClientMapper{
         response.setObservation(entity.getObservation());
         response.setNumberOfEntities(entity.getNumberOfEntities());
         response.setTimeOfReservation(entity.getTimeOfReservation());
+        response.setDayOfReservation(entity.getDayOfReservation());
 
         return response;
     } 

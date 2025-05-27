@@ -41,6 +41,8 @@ public class ClientEntity {
     @Column(nullable = false, length = 150)
     private String numberOfEntities;
     @Column(nullable = false, length = 150)
+    private String dayOfReservation;
+    @Column(nullable = false, length = 150)
     private String timeOfReservation;
 
 

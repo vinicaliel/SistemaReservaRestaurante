@@ -1,6 +1,5 @@
 package sistemareserva.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -20,13 +19,12 @@ import sistemareserva.controller.dtoresp.GetClientReservationResponse;
 import sistemareserva.controller.dtoresp.ListClientReservationResponse;
 import sistemareserva.controller.dtoresp.SaveClientReservationResponse;
 import sistemareserva.controller.dtoresp.UpdateClientReservationResponse;
-import sistemareserva.entities.ClientEntity;
 import sistemareserva.mapper.IClientMapper;
 import sistemareserva.service.IClientService;
 import sistemareserva.service.query.IClientServiceQuerry;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/reservas")
 @RequiredArgsConstructor
 public class ClientController {
 
@@ -63,7 +61,7 @@ public class ClientController {
 }
 
 @GetMapping
-List<ListClientReservationResponse> findAll() {
+public List<ListClientReservationResponse> findAll() {
     var entity = service.findAll();
     return mapper.toListResponse(entity);
 

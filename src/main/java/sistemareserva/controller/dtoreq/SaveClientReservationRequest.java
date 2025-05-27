@@ -11,5 +11,6 @@ public class SaveClientReservationRequest {
     private String status;
     private String observation;
     private String numberOfEntities;
+    private String dayOfReservation;
     private String timeOfReservation;
 }
