@@ -215,3 +215,23 @@ Garantir que todas as regras de negócio para o cadastro de reservas sejam devid
 
 - **Framework de Teste**: [JUnit 5](https://junit.org/junit5/)
 - **Execução**: via VS CODE
+
+## ⚙️ Dependências e Build
+
+- **Java 21** — Linguagem principal (`<java.version>21</java.version>`)
+- **Spring Boot 3.4.5** — Framework principal (`starter-parent`)
+- **Spring Data JPA** — Persistência de dados
+- **Spring Web** — API REST
+- **PostgreSQL** — Banco de dados relacional
+- **Flyway** — Migração de banco de dados
+- **MapStruct** — Mapeamento de DTOs
+- **Lombok** — Redução de boilerplate
+- **Springdoc OpenAPI** — Documentação Swagger
+- **JUnit 5** — Testes automatizados
+
+---
+
+## 🧰 Como rodar o projeto
+
+A API estará disponível em: [http://localhost:8080](http://localhost:8080)
+
