@@ -11,7 +11,6 @@ Este projeto é um sistema web completo com back-end em **Java (Spring)** e fron
 - ⚙️ **Java** — Linguagem principal
 - 🌱 **Spring Framework** — Aplicação web (Spring Boot, Spring Security, etc.)
 - 🐘 **PostgreSQL** — Banco de dados relacional
-- 🔐 **JWT** — Autenticação baseada em token
 - 📚 **Swagger** — Documentação da API
 - 🧪 **Maven** — Gerenciamento de dependências
 - ☁️ **Railway (opcional)** — Deploy na nuvem
